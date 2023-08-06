@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
+    <div class="load-page">
+      <div class="load">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
     <header>
       <div class="container">
         <nav class="mainNav">
@@ -104,9 +114,47 @@
             </div>
           </div>
         </div>
+        <div class="btn-left btn" onclick="sliderMoveLeft('.featured .boxs')">
+          <i class="fa fa-angle-left"></i>
+        </div>
+        <div class="btn-right btn" onclick="sliderMoveRight('.featured .boxs')">
+          <i class="fa fa-angle-right"></i>
+        </div>
       </div>
     </div>
-    <!-- <footer>
+    <div class="discover-items">
+      <div class="container">
+        <div class="head">
+          <div class="mainTitle left">
+            <h2>Discover Some Of Owr <span>Items</span></h2>
+          </div>
+          <div class="right">
+            <input type="text" placeholder="Type Something..." name="" id="" />
+            <select
+              name="Category"
+              id="chooseCategory"
+              class=""
+            >
+              <option selected="">All Categories</option>
+              <option type="checkbox" name="option1" value="Music">
+                Music
+              </option>
+              <option value="Digital">Digital</option>
+              <option value="Blockchain">Blockchain</option>
+              <option value="Virtual">Virtual</option>
+            </select>
+            <select name="Price" id="chooseCategory">
+              <option selected="">Available</option>
+              <option value="Ending-Soon">Ending Soon</option>
+              <option value="Coming-Soon">Coming Soon</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <button class="mainButton">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
       <div class="container">
         <p>
           Copyright © 2023 <a href="#">Liberty</a> NFT Marketplace Co., Ltd. All
@@ -114,7 +162,7 @@
           <a href="https://www.facebook.com/badiebahida03">Badie bahida</a>
         </p>
       </div>
-    </footer> -->
+    </footer>
 
     <script src="./js/main.js"></script>
   </body>

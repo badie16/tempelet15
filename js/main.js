@@ -1,3 +1,13 @@
+//when page is loading
+window.onload = () => {
+  document.querySelector(".load-page").classList.add("loaded");
+};
+window.onresize = () => {
+  document.querySelector(".load-page").classList.remove("loaded");
+  setTimeout(() => {
+    document.querySelector(".load-page").classList.add("loaded");
+  }, 500);
+};
 //start menu open close
 let btnOpenMenu = document.querySelector(".menu");
 let Menu = document.querySelector(".mainNav ul.link");
@@ -20,7 +30,6 @@ let isDragging, startX, startScrollLeft;
 let checkDraggingStart;
 let dragging = (p, e) => {
   if (!isDragging) return;
-  checkDraggingStart = true;
   p.scrollLeft = startScrollLeft - (e.pageX - startX);
 };
 let startDragging = (p, e) => {
@@ -34,13 +43,14 @@ let stopDragging = (p) => {
   isDragging = false;
 };
 let scrollInfine = (p) => {
-  if (p.scrollLeft === 0) {
+  if (p.scrollLeft <= 0) {
     p.classList.add("no-transmition");
-    p.scrollLeft = p.scrollWidth - 2 * p.offsetWidth;
+    p.scrollLeft = p.scrollWidth;
+    p.scrollLeft -= p.children[0].offsetWidth;
     p.classList.remove("no-transmition");
-  } else if (Math.ceil(p.scrollLeft) >= p.scrollWidth - p.offsetWidth) {
+  } else if (Math.ceil(p.scrollLeft) == p.scrollWidth - p.offsetWidth) {
     p.classList.add("no-transmition");
-    p.scrollLeft = p.offsetWidth;
+    p.scrollLeft = p.children[0].offsetWidth;
     p.classList.remove("no-transmition");
   }
 };
@@ -48,7 +58,7 @@ let changePlaseOfImg = function (p) {
   let imgsNum = p.childElementCount;
   let arrImg = [...p.children];
   arrImg
-    .slice(imgsNum)
+    .slice(-imgsNum)
     .reverse()
     .forEach((img) => {
       p.insertAdjacentHTML("afterbegin", img.outerHTML);
@@ -60,12 +70,15 @@ let changePlaseOfImg = function (p) {
 let AutoPlayDragging = (slider) => {
   setInterval(() => {
     if (!checkDraggingStart) {
-      sliderMoveRight(slider);
+      slider.scrollLeft += slider.children[0].clientWidth;
     }
   }, 2000);
 };
 let mouseleave = () => {
   checkDraggingStart = false;
+};
+let mouseenter = () => {
+  checkDraggingStart = true;
 };
 // slider banner
 function sliderMoveLeft(slider) {
@@ -84,7 +97,9 @@ sliderImg.forEach((slider) => {
   document.addEventListener("mouseup", () => stopDragging(slider));
   slider.addEventListener("scroll", () => scrollInfine(slider));
   changePlaseOfImg(slider);
-  slider.addEventListener("mouseleave", () => mouseleave());
+  AutoPlayDragging(slider);
+  slider.parentElement.addEventListener("mouseenter", () => mouseenter());
+  slider.parentElement.addEventListener("mouseleave", () => mouseleave());
 });
 // start filters
 btnfilter = document.querySelectorAll(".filters li");

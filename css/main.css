@@ -9,6 +9,9 @@
   margin: 0;
   scroll-behavior: smooth;
 }
+i {
+  color: var(--main-color);
+}
 li {
   list-style: none;
 }
@@ -109,9 +112,6 @@ body {
   scroll-behavior: auto;
   user-select: unset;
 }
-#sliderImg.no-transmition {
-  scroll-behavior: auto;
-}
 #sliderImg #slid {
   padding-bottom: 15px;
   scroll-snap-align: start;
@@ -121,7 +121,56 @@ body {
   cursor: grabbing;
   user-select: unset;
 }
+#sliderImg.no-transmition {
+  scroll-behavior: auto !important;
+}
 /* end Global */
+/* start load page */
+.load-page {
+  height: 100vh;
+  background: #000;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 2222222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.load-page.loaded {
+  display: none;
+}
+.load-page .load {
+  display: flex;
+  gap: 10px;
+}
+.load-page .load span {
+  width: 20px;
+  height: 20px;
+  background: var(--main-color);
+  display: block;
+  border-radius: 50%;
+}
+.load-page .load .dot {
+  animation: dot 2s linear infinite;
+  transform: translateX(0px);
+}
+.load-page .load .dots {
+  display: flex;
+  animation: dots 2s infinite;
+  gap: 10px;
+}
+@keyframes dot {
+  50% {
+    transform: translateX(100px);
+  }
+}
+@keyframes dots {
+  50% {
+    transform: translateX(-30px);
+  }
+}
+/* end load page */
 /* start header */
 
 header {
@@ -652,7 +701,7 @@ footer p a {
   color: #fff;
 }
 .landing2 .text {
-  padding: var(--main-padding);
+  padding: var(--main-padding) 0;
 }
 .landing2 .text h5 {
   font-size: 20px;
@@ -668,6 +717,8 @@ footer p a {
 }
 .landing2 .featured {
   padding: 0 20px;
+  position: relative;
+  margin-bottom: -250px;
 }
 .landing2 .featured .boxs {
   display: grid;
@@ -677,18 +728,102 @@ footer p a {
   grid-auto-columns: calc(100% / 3 - 14px);
 }
 .landing2 .featured .boxs .box {
-  position: absolute;
-  background: #282b2fe6;
-  padding: 20px;
-  border-radius: 20px;
-  transform: translate(-50%, -100%);
-  bottom: 0px;
-  left: 50%;
-  width: max-content;
+  position: relative;
+  overflow: hidden;
 }
-.landing2 .featured .boxs .box .img {
+.landing2 .featured .boxs .box img {
+  width: 100%;
+  border-radius: 20px;
 }
 .landing2 .featured .boxs .box .info {
   position: absolute;
+  background: #282b2fe6;
+  padding: 25px 35px;
+  border-radius: 20px;
+  transform: translate(-50%, -100%);
+  bottom: -100px;
+  left: 200%;
+  width: max-content;
+  border: 1px solid rgba(64, 66, 69, 0.9);
+  transition: 0.5s;
+}
+.landing2 .featured .boxs .box:hover .info {
+  left: 50%;
+}
+.landing2 .featured .boxs .box .info h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.landing2 .featured .btn {
+  padding: 0;
+  transform: translateY(-50%);
+}
+@media (max-width: 991px) {
+  .landing2 .featured .boxs {
+    grid-auto-columns: calc(100% / 2 - 12px);
+  }
+  .landing2 {
+    padding-top: 150px;
+  }
+}
+@media (max-width: 776px) {
+  .landing2 .featured .boxs {
+    grid-auto-columns: 100%;
+  }
+  .landing2 {
+    padding-top: 100px;
+  }
 }
 /* end landing 2 */
+/* start discover items */
+.discover-items {
+  background: url(../img/dark-bg.jpg);
+  padding: calc(var(--main-padding) + 250px) 0 var(--main-padding);
+}
+.discover-items .mainTitle h2::before {
+  background-color: var(--main-color);
+}
+.discover-items .head input,
+.discover-items .head select {
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(64, 66, 69, 0.9);
+  outline: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 15px;
+  flex: auto;
+}
+.discover-items .head select option {
+  background: #2a2a2a;
+}
+.discover-items .head input::placeholder {
+  color: #fff;
+}
+.discover-items .head .right {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.discover-items .head button {
+  padding: 8px 20px;
+  margin: 0;
+}
+@media (max-width: 1199px) {
+  .discover-items .head {
+    flex-direction: column;
+    margin-bottom: calc(var(--main-padding) / 2);
+  }
+  .discover-items .head .right {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    margin-left: auto;
+  }
+}
+@media (max-width: 776px){
+  .discover-items .head .right button{
+    width: 100%;
+  }
+}
+/* end discover items */
